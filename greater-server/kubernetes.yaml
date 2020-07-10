@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: varowner-greater
+  labels:
+    app: greater
+    owner: varowner
+spec:
+  selector:
+    matchLabels:
+      app: greater
+      owner: varowner
+  template:
+    metadata:
+      labels:
+        app: greater
+        tier: web
+        owner: varowner
+    spec:
+      containers:
+        - name: greater
+          image: bazel/greater-server
+          ports:
+            - containerPort: 50051
+          resources:
+            requests:
+              cpu: "10m"
